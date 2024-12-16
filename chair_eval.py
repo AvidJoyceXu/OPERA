@@ -108,6 +108,9 @@ model_config = cfg.model_cfg
 model_config.device_8bit = args.gpu_id
 model_cls = registry.get_model_class(model_config.arch)
 model = model_cls.from_config(model_config).to(device)
+
+model = torch.compile(model)
+
 model.eval()
 processor_cfg = cfg.get_config().preprocess
 processor_cfg.vis_processor.eval.do_normalize = False
@@ -148,7 +151,7 @@ if not os.path.exists(base_dir):
 
 
 for img_id in tqdm(range(len(img_files))):
-    if img_id == 500:
+    if img_id == 5:
         break
     img_file = img_files[img_id]
     img_id = int(img_file.split(".jpg")[0][-6:])
@@ -184,6 +187,7 @@ for img_id in tqdm(range(len(img_files))):
     img_save["caption"] = out[0]
 
     # dump metric file
+    print(base_dir)
     with open(os.path.join(base_dir, 'ours-s_{}-t_{}-num_can_{}-p_{}.jsonl'.format(args.scale_factor, args.threshold, args.num_attn_candidates, args.penalty_weights)), "a") as f:
         json.dump(img_save, f)
         f.write('\n')
