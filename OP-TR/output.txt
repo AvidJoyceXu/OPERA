@@ -1,0 +1,49 @@
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 3 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 4 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 5 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 6 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 7 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 8 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------
+Command: p y t h o n   c h a i r . p y       - - c a p _ f i l e   / h o m e / x l y / O P E R A / l o g / l l a v a - 1 . 5 / o u r s - n e w . j s o n l     - - i m a g e _ i d _ k e y   i m a g e _ i d   - - c a p t i o n _ k e y   c a p t i o n   - - c o c o _ p a t h   / h o m e / x l y / O P E R A / c o c o / a n n o t a t i o n s       - - s a v e _ p a t h   / h o m e / x l y / O P E R A / o u r r e s u l t s / 9 . j s o n l
+Standard Output:
+
+Standard Error:
+python: can't open file '/home/xly/OPERA/Youlong/chair.py': [Errno 2] No such file or directory
+
+----------------------------------------

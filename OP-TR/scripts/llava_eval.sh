@@ -1,0 +1,6 @@
+python chair.py --cap_file /home/xly/OPERA/log/llava-1.5/1.jsonl --image_id_key image_id --caption_key caption --coco_path /home/xly/OPERA/data/annotations --save_path /home/xly/OPERA/output/CHAIR_evaluations
+python chair.py --cap_file /home/xly/OPERA/log/llava-1.5/2.jsonl --image_id_key image_id --caption_key caption --coco_path /home/xly/OPERA/data/annotations --save_path /home/xly/OPERA/output/CHAIR_evaluations
+python chair.py --cap_file /home/xly/OPERA/log/llava-1.5/3.jsonl --image_id_key image_id --caption_key caption --coco_path /home/xly/OPERA/data/annotations --save_path /home/xly/OPERA/output/CHAIR_evaluations
+python chair.py --cap_file /home/xly/OPERA/log/llava-1.5/4.jsonl --image_id_key image_id --caption_key caption --coco_path /home/xly/OPERA/data/annotations --save_path /home/xly/OPERA/output/CHAIR_evaluations
+python chair.py --cap_file /home/xly/OPERA/log/llava-1.5/5.jsonl --image_id_key image_id --caption_key caption --coco_path /home/xly/OPERA/data/annotations --save_path /home/xly/OPERA/output/CHAIR_evaluations
+python chair.py --cap_file /home/xly/OPERA/log/llava-1.5/6.jsonl --image_id_key image_id --caption_key caption --coco_path /home/xly/OPERA/data/annotations --save_path /home/xly/OPERA/output/CHAIR_evaluations
