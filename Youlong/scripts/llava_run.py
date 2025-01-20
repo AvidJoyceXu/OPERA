@@ -32,15 +32,15 @@ def run_commands(commands, log_flags):
     print("All outputs have been saved to output_second.txt.")
 
 # 示例命令和对应的记录标志
-base_dir = "/home/xly"
-local_path_to_utils_file = f"{base_dir}/OPERA/Youlong/"
-path_to_utils_file = f"{base_dir}/OPERA/transformers-4.29.2/src/transformers/generation/"
-path_to_opera = f"{base_dir}/OPERA/"
-path_to_coco_val = f"{base_dir}/OPERA/data/val2014/"
-path_to_coco_annotations  = f"{base_dir}/OPERA/data/annotations"
-path_to_generated_captions = f"{base_dir}/OPERA/log/llava-1.5/"
+base_dir = "/home/xly/OPERA"
+local_path_to_utils_file = f"{base_dir}/Youlong/"
+path_to_utils_file = f"{base_dir}/transformers-4.29.2/src/transformers/generation/"
+path_to_opera = f"{base_dir}/"
+path_to_coco_val = f"{base_dir}/data/val2014/"
+path_to_coco_annotations  = f"{base_dir}/data/annotations"
+path_to_generated_captions = f"{base_dir}/log/llava-1.5/"
 # file_name_of_generated_captions = "ours-second.jsonl" # 这个是默认的
-save_path = f"{base_dir}/OPERA/ourresults/"
+save_path = f"{base_dir}/ourresults/"
 
 def Encapsulation(file_name: str = 'utils_1.py', comment: str = '') -> list:
     command_1 = f"cp {local_path_to_utils_file + file_name} {path_to_utils_file + 'utils.py'}"
@@ -70,6 +70,6 @@ commands = [
     *Encapsulation('utils_14.py'),
 ]
 print(commands)
-log_flags = ["python chair.py" in x for x in commands]  # 只有第1和第3个命令的输出需要被记录
+log_flags = ["python chair.py" in x for x in commands] 
 print(log_flags)
 run_commands(commands, log_flags)
