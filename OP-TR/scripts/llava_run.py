@@ -33,7 +33,7 @@ def run_commands(commands, log_flags):
 
 # 示例命令和对应的记录标志
 base_dir = "/home/xly/OPERA"
-local_path_to_utils_file = f"{base_dir}/Youlong/"
+local_path_to_utils_file = f"{base_dir}/OP-TR/"
 path_to_utils_file = f"{base_dir}/transformers-4.29.2/src/transformers/generation/"
 path_to_opera = f"{base_dir}/"
 path_to_coco_val = f"{base_dir}/data/val2014/"

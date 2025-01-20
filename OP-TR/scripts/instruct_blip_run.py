@@ -33,7 +33,7 @@ def run_commands(commands, log_flags):
 
 # 示例命令和对应的记录标志
 base_dir = "/home/xly"
-local_path_to_utils_file = f"{base_dir}/OPERA/Youlong/"
+local_path_to_utils_file = f"{base_dir}/OPERA/OP-TR/"
 path_to_utils_file = f"{base_dir}/OPERA/transformers-4.29.2/src/transformers/generation/"
 path_to_opera = f"{base_dir}/OPERA/"
 path_to_coco_val = f"{base_dir}/OPERA/data/val2014/"
@@ -63,8 +63,8 @@ commands = [
     # *Encapsulation('utils_6.py','with candidate rewards'),
     # *Encapsulation('utils_7.py','c = log 0.05'),
     # *Encapsulation('utils_9.py'),
-    # *Encapsulation('utils_10.py'),
-    *Encapsulation('utils_12.py')
+    *Encapsulation('utils_10.py'),
+    # *Encapsulation('utils_12.py')
 ]
 print(commands)
 log_flags = ["python chair.py" in x for x in commands]  # 只有第1和第3个命令的输出需要被记录

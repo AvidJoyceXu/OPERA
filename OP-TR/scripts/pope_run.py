@@ -33,7 +33,7 @@ def run_commands(commands, log_flags):
 
 # 示例命令和对应的记录标志
 base_dir = "/home/xly"
-local_path_to_utils_file = f"{base_dir}/OPERA/Youlong/"
+local_path_to_utils_file = f"{base_dir}/OPERA/OP-TR/"
 path_to_utils_file = f"{base_dir}/OPERA/transformers-4.29.2/src/transformers/generation/"
 path_to_opera = f"{base_dir}/OPERA/"
 path_to_coco_val = f"{base_dir}/OPERA/data/val2014/"
@@ -47,7 +47,7 @@ def Encapsulation(file_name: str = 'utils_1.py', comment: str = '') -> list:
     command_1 = f"cp {local_path_to_utils_file + file_name} {path_to_utils_file + 'utils.py'}"
     # 记住在这里要把gpu-id也改一下（如果需要的话）
     command_2 = f"python pope_eval.py --model {model}  --data_path {path_to_coco_val} --pope-type random --beam 5 --scale_factor 50 --threshold 15 --num_attn_candidates 5 --penalty_weights 1\
-                --gpu-id 1"
+                --gpu-id 0"
     # command_3 = f"python chair.py   --cap_file {path_to_generated_captions + file_name_of_generated_captions}  --image_id_key image_id --caption_key caption --coco_path {path_to_coco_annotations}  --save_path {save_path + str(idx)}.jsonl"
     # command_4 = f"mv {path_to_generated_captions + file_name_of_generated_captions} {path_to_generated_captions + str(idx)}.jsonl"
     command_5 = f"rm -f {path_to_utils_file + 'utils.py'}"
@@ -61,7 +61,8 @@ commands = [
     # *Encapsulation('utils_5.py','reward = log 7'),
     # *Encapsulation('utils_6.py','with candidate rewards'),
     # *Encapsulation('utils_7.py','c = log 0.05'),
-    *Encapsulation('utils_12.py'),
+    # *Encapsulation('utils_12.py'),
+    *Encapsulation('utils_10.py'),
 ]
 print(commands)
 log_flags = ["python pope_eval.py" in x for x in commands]  
