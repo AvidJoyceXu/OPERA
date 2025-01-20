@@ -48,20 +48,23 @@ def Encapsulation(file_name: str = 'utils_1.py', comment: str = '') -> list:
     # 记住在这里要把gpu-id也改一下（如果需要的话）
     command_2 = f"python chair_eval.py --model {model}  --data_path {path_to_coco_val} --beam 5 --scale_factor 50 --threshold 15 --num_attn_candidates 5 --penalty_weights 1 \
                 --gpu-id 0 \
-                --output_path {model}_{file_name}.jsonl"
+                --output_path {file_name}.jsonl"
     # command_3 = f"python chair.py   --cap_file {path_to_generated_captions + file_name_of_generated_captions}  --image_id_key image_id --caption_key caption --coco_path {path_to_coco_annotations}  --save_path {save_path + str(idx)}.jsonl"
     # command_4 = f"mv {path_to_generated_captions + file_name_of_generated_captions} {path_to_generated_captions + str(idx)}.jsonl"
     command_5 = f"rm -f {path_to_utils_file + 'utils.py'}"
     return [command_1, command_2, command_5]
 
 commands = [
-    *Encapsulation('utils_1.py','d0 = 5'),
-    *Encapsulation('utils_2.py','alpha = 2.0'),
-    *Encapsulation('utils_3.py','c = log 0.2'),
-    *Encapsulation('utils_4.py','reward = log 30'),
-    *Encapsulation('utils_5.py','reward = log 7'),
-    *Encapsulation('utils_6.py','with candidate rewards'),
-    *Encapsulation('utils_7.py','c = log 0.05'),
+    # *Encapsulation('utils_1.py','d0 = 5'),
+    # *Encapsulation('utils_2.py','alpha = 2.0'),
+    # *Encapsulation('utils_3.py','c = log 0.2'),
+    # *Encapsulation('utils_4.py','reward = log 30'),
+    # *Encapsulation('utils_5.py','reward = log 7'),
+    # *Encapsulation('utils_6.py','with candidate rewards'),
+    # *Encapsulation('utils_7.py','c = log 0.05'),
+    # *Encapsulation('utils_9.py'),
+    # *Encapsulation('utils_10.py'),
+    *Encapsulation('utils_12.py')
 ]
 print(commands)
 log_flags = ["python chair.py" in x for x in commands]  # 只有第1和第3个命令的输出需要被记录
