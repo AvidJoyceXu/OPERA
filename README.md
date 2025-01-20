@@ -1,12 +1,6 @@
-# OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation (CVPR 2024 Highlight)
+# OP-TR: Improving OPERA by Reimplementing Over-Trust Penalty and Introducing Trust Reward
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-g.svg)](https://opensource.org/licenses/MIT)
-[![Arxiv](https://img.shields.io/badge/arXiv-2311.17911-B21A1B)](https://arxiv.org/pdf/2311.17911.pdf)
-[![Hugging Face Transformers](https://img.shields.io/badge/%F0%9F%A4%97-Transformers-blue)](https://github.com/huggingface/transformers)
-[![GitHub Stars](https://img.shields.io/github/stars/shikiw/OPERA?style=social)](https://github.com/shikiw/OPERA/stargazers)
-
-
-This repository provides the official PyTorch implementation of the following paper: 
+This repository provides the code implementation of Youlong Ding and Lingyun Xu's MLLM 2025 fianl project, which is an improvement based on the following work: 
 > [**OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation**](https://arxiv.org/pdf/2311.17911.pdf) <br>
 > [Qidong Huang](https://shikiw.github.io/)<sup>1,2</sup>, 
 > [Xiaoyi Dong](https://scholar.google.com/citations?user=FscToE0AAAAJ&hl=en)<sup>2</sup>, 
@@ -19,80 +13,14 @@ This repository provides the official PyTorch implementation of the following pa
 > [Nenghai Yu](https://scholar.google.com/citations?user=7620QAMAAAAJ&hl=en)<sup>1</sup> <br>
 > <sup>1</sup>University of Science and Technology of China, <sup>2</sup>Shanghai AI Laboratory <br>
 
-
 ## Overview
-
 <p align="center"><img src="./teaser.png" alt="teaser" width="500px" /></p>
 
-Hallucination, posed as a pervasive challenge of multimodal large language models (MLLMs), has significantly impeded their real-world usage that demands precise judgment. Existing methods mitigate this issue with either training with specific designed data or inferencing with external knowledge from other sources, incurring inevitable additional costs. In this paper, we present OPERA, a novel MLLM decoding method grounded in an Over-trust Penalty and a Retrospection-Allocation strategy, serving as a nearly free lunch to alleviate the hallucination issue without additional data, knowledge, or training. Our approach begins with an interesting observation that, most hallucinations are closely tied to the knowledge aggregation patterns manifested in the self-attention matrix, i.e., MLLMs tend to generate new tokens by focusing on a few summary tokens, but not all the previous tokens. Such partial overtrust inclination results in the neglecting of image tokens and describes the image content with hallucination. Based on the observation, OPERA introduces a penalty term on
-the model logits during the beam-search decoding to mitigate the over-trust issue, along with a rollback strategy that retrospects the presence of summary tokens in the previously generated tokens, and re-allocate the token selection if necessary. With extensive experiments, OPERA shows significant hallucination-mitigating performance on different MLLMs and metrics, proving its effectiveness and generality.
-
 ## Setup
-
-The main implementation of OPERA is in `transformers-4.29.2/src/transformers/generation/utils.py`.
-
-So it is convenient to use OPERA decoding by just installing our modified `transformers` package.
 ```
 conda env create -f environment.yml
 conda activate opera
-python -m pip install -e transformers-4.29.2
 ```
-#### Note: to implement OPERA on other version of transformers, you can follow the steps as the follows:
-- Find the file at `transformers-4.29.2/src/transformers/generation/utils.py`.
-- Add the arguments in `transformers.generate` function [here](https://github.com/shikiw/OPERA/blob/aa968c7501f4d3d8362f4b3bcab855024f4da5f6/transformers-4.29.2/src/transformers/generation/utils.py#L1156-L1162).
-- Add the code in `transformers.generate` function [here](https://github.com/shikiw/OPERA/blob/aa968c7501f4d3d8362f4b3bcab855024f4da5f6/transformers-4.29.2/src/transformers/generation/utils.py#L1619-L1665).
-- Copy and paste the `opera_decoding` function [here](https://github.com/shikiw/OPERA/blob/aa968c7501f4d3d8362f4b3bcab855024f4da5f6/transformers-4.29.2/src/transformers/generation/utils.py#L3116-L3674).
-
-## TL;DR
-After setup the environment, you can directly use OPERA on your own MLLM model by:
-```
-# specify the location indexes of some input tokens
-START_INDEX_of_IMAGE_TOKENS = <the location index of the first image token>
-END_INDEX_of_IMAGE_TOKENS = <the location index of the last image token>
-NUM_of_TOKENS_IN_THE_PROMPT = <the total number of tokens in the user prompt (including image tokens)>
-
-key_position = {
-  "image_start": START_INDEX_of_IMAGE_TOKENS, 
-  "image_end": END_INDEX_of_IMAGE_TOKENS, 
-  "response_start": NUM_of_TOKENS_IN_THE_PROMPT,
-}
-
-# add some arguments in the generate function
-outputs = MLLM_model.generate(
-    input_ids=input_ids,
-    inputs_embeds=inputs_embeds,
-    attention_mask=attention_mask,
-    do_sample=False,
-    num_beams=5,
-    max_new_tokens=512,
-    # opera
-    opera_decoding=True,
-    key_position=key_position,
-    scale_factor=50,
-    threshold=15,
-    num_attn_candidates=5,
-    penalty_weights=1,
-)
-# for a more efficient version, please use the setting below:
-outputs = MLLM_model.generate(
-    input_ids=input_ids,
-    inputs_embeds=inputs_embeds,
-    attention_mask=attention_mask,
-    do_sample=False,
-    num_beams=5,
-    max_new_tokens=512,
-    # opera
-    opera_decoding=True,
-    key_position=key_position,
-    scale_factor=50,
-    threshold=25,
-    num_attn_candidates=1,
-    penalty_weights=1,
-)
-```
-
-Please refer to `demo.ipynb` [here](https://github.com/shikiw/OPERA/blob/1e74d8b5d082579c81e0e77ef1cf4a44d20ab91e/demo.ipynb) for more details.
-
 
 ## Evaluation
 

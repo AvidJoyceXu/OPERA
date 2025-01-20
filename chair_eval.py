@@ -86,10 +86,12 @@ parser.add_argument("--scale_factor", type=float, default=50)
 parser.add_argument("--threshold", type=int, default=15)
 parser.add_argument("--num_attn_candidates", type=int, default=5)
 parser.add_argument("--penalty_weights", type=float, default=1.0)
+parser.add_argument("--output_path", type=str, default=None)
 args = parser.parse_known_args()[0]
-
-
-
+if args.output_path is None:
+    output_path = 'ours-s_{}-t_{}-num_can_{}-p_{}.jsonl'.format(args.scale_factor, args.threshold, args.num_attn_candidates, args.penalty_weights)
+else:
+    output_path = args.output_path
 
 
 
@@ -126,7 +128,7 @@ norm = transforms.Normalize(mean, std)
 img_files = os.listdir(args.data_path)
 random.shuffle(img_files)
 
-with open(args.data_path + '../annotations_trainval2014/annotations/instances_val2014.json', 'r') as f:
+with open(args.data_path + '../annotations/instances_val2014.json', 'r') as f:
     lines = f.readlines()
 coco_anns = json.loads(lines[0])
 
@@ -149,9 +151,9 @@ base_dir  = "./log/" + args.model
 if not os.path.exists(base_dir):
     os.mkdir(base_dir)
 
-
+print(len(img_files))
 for img_id in tqdm(range(len(img_files))):
-    if img_id == 5:
+    if img_id == 500:
         break
     img_file = img_files[img_id]
     img_id = int(img_file.split(".jpg")[0][-6:])
@@ -188,7 +190,8 @@ for img_id in tqdm(range(len(img_files))):
 
     # dump metric file
     print(base_dir)
-    with open(os.path.join(base_dir, 'ours-s_{}-t_{}-num_can_{}-p_{}.jsonl'.format(args.scale_factor, args.threshold, args.num_attn_candidates, args.penalty_weights)), "a") as f:
+    # with open(os.path.join(base_dir, 'ours-s_{}-t_{}-num_can_{}-p_{}.jsonl'.format(args.scale_factor, args.threshold, args.num_attn_candidates, args.penalty_weights)), "a") as f:
+    with open(os.path.join(base_dir, output_path), "a") as f:
         json.dump(img_save, f)
         f.write('\n')
     
