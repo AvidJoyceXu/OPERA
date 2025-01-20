@@ -1,6 +1,6 @@
 # OP-TR: Improving OPERA by Reimplementing Over-Trust Penalty and Introducing Trust Reward
 
-This repository provides the code implementation of Youlong Ding and Lingyun Xu's MLLM 2025 fianl project, which is an improvement based on the following work: 
+This repository provides the code implementation of [Youlong Ding](https://github.com/VincentArak) and [Lingyun Xu](https://github.com/AvidJoyceXu)'s MLLM 2025 fianl project, which is an improvement based on the following work: 
 > [**OPERA: Alleviating Hallucination in Multi-Modal Large Language Models via Over-Trust Penalty and Retrospection-Allocation**](https://arxiv.org/pdf/2311.17911.pdf) <br>
 > [Qidong Huang](https://shikiw.github.io/)<sup>1,2</sup>, 
 > [Xiaoyi Dong](https://scholar.google.com/citations?user=FscToE0AAAAJ&hl=en)<sup>2</sup>, 
@@ -13,14 +13,16 @@ This repository provides the code implementation of Youlong Ding and Lingyun Xu'
 > [Nenghai Yu](https://scholar.google.com/citations?user=7620QAMAAAAJ&hl=en)<sup>1</sup> <br>
 > <sup>1</sup>University of Science and Technology of China, <sup>2</sup>Shanghai AI Laboratory <br>
 
+Both Youlong and Lingyun contribute intensively to the discussion, codebase, experiments, and writing of this project. They work in jointed efforts toward completion.
 ## Overview
 <p align="center"><img src="./teaser.png" alt="teaser" width="500px" /></p>
 
 ## Setup
 ### Environment
-```
+```bash
 conda env create -f environment.yml
 conda activate opera
+pwd # all scripts should be executed in the /PATH/TO/OPERA local directory
 ```
 
 ### Model and Data for Evaluation
@@ -42,18 +44,14 @@ git clone https://huggingface.co/liuhaotian/llava-v1.5-7b
 ```bash
 git clone https://huggingface.co/lmsys/vicuna-7b-v1.1
 ```
-- Download [Vicuna 7B v0 model](https://huggingface.co/Vision-CAIR/vicuna-7b/tree/main) and specify it at [Line 18](https://github.com/shikiw/OPERA/blob/bf18aa9c409f28b31168b0f71ebf8457ae8063d5/minigpt4/configs/models/minigpt4_vicuna0.yaml#L18) of `minigpt4/configs/models/minigpt4_vicuna0.yaml`.
-```bash
-git clone https://huggingface.co/lmsys/vicuna-7b-delta-v0
-```
 
 ### Arguments
 
 | Argument             | Example             | Description   |
 | -------------------- | ------------------- | ------------- |
-| `--model`    | `llava-1.5` | Specify the MLLM model, this codebase supports `instructblip`, `minigpt4`, `llava-1.5`, `shikra`. |
+| `--model`    | `llava-1.5` | Specify the MLLM model, this codebase supports `instructblip`, `llava-1.5`. |
 | `--data-path`     | `/path/to/dataset` | Path to the dataset file or folder, e.g., `COCO_2014/val2014/`. |
-| `--pope-type`     | `random` | Type for POPE evaluation, supports `random`, `popular`, `adversarial`. |
+| `--pope-type`     | `random` | Type for POPE evaluation, supports `random`. |
 | `--scale_factor`   | `50` | The scale factor to scale up the self-attention weights. Default: 50. |
 | `--threshold`      | `15` | The threshold for attending retrospection. Default: 15. |
 | `--num_attn_candidates`   | `5` | The number of candidates per beam. Default: 5. |
@@ -88,13 +86,13 @@ There're two kinds of `jsonl` file.
 It takes about 2.5h to generate captioning for 500 images on an NVIDIA A100 80GB PCIe acceleration card.
 
 ### OP-TR output generation
-- Use `Youlong/scripts/llava-run.py` to automatically replace the orginal `transformers-4.29.2/src/transformers/generation/utils.py` file with OP-TR implemented `utils.py` 
-  - **NOTICE**: change the [path-related variables](https://github.com/AvidJoyceXu/OPERA/blob/main/Youlong/scripts/llava_run.py#L56-L70) in `llava-run.py` to your own path (to the OPERA base directory, data directory, and the model directory)
-  - the set of`Youlong/utils_<INT>.py` is OP-TR implemented `utils.py` with different hyperparameters.
+- Use `OP-TR/scripts/llava-run.py` to automatically replace the orginal `transformers-4.29.2/src/transformers/generation/utils.py` file with OP-TR implemented `utils.py` 
+  - **NOTICE**: change the [path-related variables](https://github.com/AvidJoyceXu/OPERA/blob/main/OP-TR/scripts/llava_run.py#L34-L43) in `llava-run.py` to your own path (to the OPERA base directory, data directory, and the model directory)
+  - the set of`OP-TR/utils_<INT>.py` is OP-TR implemented `utils.py` with different hyperparameters.
 
 - examine with different hyperparameter combinations:
 
-  - Modify the hyperparameters in the default values of the `generate` member function's parameter in [`utils-<INT>.py`](https://github.com/AvidJoyceXu/OPERA/blob/main/Youlong/utils_1.py#L1166-L1169).
+  - Modify the hyperparameters in the default values of the `generate` member function's parameter in [`utils-<INT>.py`](https://github.com/AvidJoyceXu/OPERA/blob/main/OP-TR/utils_1.py#L1166-L1169).
     ```bash
     class GenerationMixin():
         ...
@@ -107,10 +105,10 @@ It takes about 2.5h to generate captioning for 500 images on an NVIDIA A100 80GB
             Reward: Optional[float] = math.log(15),
         )
     ```
-  - create a new `utils-<INT>.py`, add to the `Youlong` directory, and specify the file name in the [`Youlong/scripts/llava-run.py`](https://github.com/AvidJoyceXu/OPERA/blob/main/Youlong/scripts/llava_run.py#L56-L70) script.
-  ```bash
+  - create a new `utils-<INT>.py`, add to the `OP-TR` directory, and specify the file name in the [`OP-TR/scripts/llava-run.py`](https://github.com/AvidJoyceXu/OPERA/blob/main/OP-TR/scripts/llava_run.py#L56-L70) script.
 
-  ```
+- After the path variables and executables are set up, run
+`python OP-TR/scripts/llava-run.py` to generate CHAIR output jsonl files.
 ### OPERA output generation
 - Generate the MLLM's responses and save them in a jsonl file:
 ```bash
@@ -123,16 +121,12 @@ Note: Please check out our released results in `log/llava-1.5` and `log/instruct
 python chair.py --cap_file /path/to/jsonl --image_id_key image_id --caption_key caption --coco_path /path/to/COCO/annotations_trainval2014/annotations/ --save_path /path/to/save/jsonl
 ```
 ### POPE evaluation
+#### OP-TR
+Just like the OP-TR CHAIR output generation, add a new `utils.py` file in the `OP-TR` directory, specify to run the exact `utils.py` file in [the list of commands-to-execute](https://github.com/AvidJoyceXu/OPERA/blob/main/OP-TR/scripts/pope_run.py#L56-L64) and modify the [path-relevant variables](https://github.com/AvidJoyceXu/OPERA/blob/main/OP-TR/scripts/pope_run.py#L34-L44) to launch a POPE evaluation against the chosen hyper-parameter combination on the OP-TR implementation.
+#### OPERA
 ```bash
 python pope_eval.py --model MODEL_NAME --data_path /path/to/COCO --pope-type random --gpu-id GPU_IDs --beam 5 --scale_factor 50 --threshold 15 --num_attn_candidates 5 --penalty_weights 1
 ```
-Result on `Random` split:
-
-| Model | Accuracy | Precision | Recall | F1 score| Yes ratio |
-| ----- | -------- | --------- | ------ | ------- | --------- |
-| InstructBLIP 7B | 90.3 | 93.8 | 87.0 | 90.3 | 47.8 |
-| MiniGPT-4 7B | 79.8 | 89.7 | 68.7 | 77.8 | 39.5 |
-| LLaVA-1.5 7B | 89.4 | 90.4 | 88.8 | 89.6 | 50.6 |
 
 
 
